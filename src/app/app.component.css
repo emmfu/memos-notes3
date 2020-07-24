@@ -1,0 +1,14 @@
+.container-fluid {
+    height: 100vh;
+}
+
+#headerRow {
+    border-bottom: 1px solid lightgray;
+    justify-content: center;
+}
+
+#displayRow {
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}

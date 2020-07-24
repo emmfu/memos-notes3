@@ -1,0 +1,6 @@
+.row {
+    height: 100%;
+}
+#noteListCol {
+    border-right: 1px solid lightgrey;
+}

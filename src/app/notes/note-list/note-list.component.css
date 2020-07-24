@@ -1,0 +1,11 @@
+.row {
+    justify-content: right;
+    padding: 3px;
+}
+#btnRow {
+    border-bottom: 1px solid lightgray;
+}
+
+#noteItemRow {
+    flex-direction: column;
+}

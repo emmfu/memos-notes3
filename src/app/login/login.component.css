@@ -1,0 +1,36 @@
+.container-fluid {
+    align-items: center;
+    align-content: space-around;
+    border: 1px solid black;
+    border-radius: 16px;
+    flex-direction: column;
+    margin-top: 16px;
+    padding: 32px;
+}
+
+form {
+    align-content: space-around;
+    display: flex;
+    flex-direction:column;
+}
+
+#emailHelp {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sign-in-text {
+  font-weight: bold;
+}
+
+.exampleInputEmail1 {
+  font-weight: bold;
+}
+
+.exampleInputPassword1 {
+  font-weight: bold;
+}
+
+.form-check-label {
+  font-weight: bold;
+}

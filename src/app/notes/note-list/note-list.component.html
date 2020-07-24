@@ -1,0 +1,18 @@
+<div class="row" id="btnRow">
+    <button 
+        type="button"
+        class="btn btn-primary"
+        (click)="onAdd()">
+        Add Note
+    </button>
+</div>
+<div class="row" id="noteItemRow">
+    <div>
+        <app-note-list-item 
+        *ngFor="let noteEL of notes; let i = index" 
+        [note]="noteEL"
+        [index]="i">
+    </app-note-list-item>
+      
+    </div>
+</div>

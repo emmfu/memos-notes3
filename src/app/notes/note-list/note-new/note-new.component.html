@@ -1,0 +1,39 @@
+<form [formGroup]="noteForm" (ngSubmit)="onSubmit(noteForm.value)">
+    <div class="row" id="btnRow">
+        <button 
+            class="btn btn-warning" 
+            type="button" 
+            (click)="onClear()">
+            Clear
+        </button>
+        <button 
+            class="btn btn-success" 
+            type="submit"
+            [disabled]="!noteForm.valid">
+            Save
+        </button>
+    </div>
+    <div class="form-group">
+        <label for="noteTitle">Title</label>
+        <input 
+            type="text" 
+            id="noteTitle" 
+            formControlName="noteTitle" 
+            class="form-control">
+        <span *ngIf="!noteForm.get('noteTitle').valid && noteForm.get('noteTitle').touched" class="help-block">
+            <span>
+                This Field is required!
+            </span>
+        </span>
+    </div>
+    <div class="form-group">
+        <label for="noteBody">Body</label>
+        <textarea type="text" id="noteBody" formControlName="noteBody" class="form-control"></textarea>
+        <span *ngIf="!noteForm.get('noteBody').valid && noteForm.get('noteBody').touched" class="help-block">
+            <span>
+                This Field is required!
+            </span>
+        </span>
+    </div>
+
+</form>

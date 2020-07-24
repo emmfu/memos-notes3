@@ -1,0 +1,14 @@
+.btn {
+    margin: 3px
+}
+
+#btnRow {
+    align-items: baseline;
+    border-bottom: 1px solid lightgray;
+    justify-content: right;
+    padding-left: 10px;
+}
+
+span {
+    color: red;
+}
