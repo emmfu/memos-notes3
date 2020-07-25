@@ -11,7 +11,6 @@ import { NoteService } from 'src/app/note.service';
 export class NoteListItemComponent implements OnInit {
   @Input() note: Note;
   @Input() index: number;
-  
   constructor(private router: Router,
               private notesService: NoteService) { }
 
@@ -19,9 +18,8 @@ export class NoteListItemComponent implements OnInit {
   }
 
   onClick() {
-    console.log("This is the clicked note: ", this.note);
-    console.log("And this is the Index: ", this.index);
-    console.log("This is the id: ", this.note.id);
+    this.notesService.changeNote(this.note);   
+    this.router.navigate(['/notes/', this.note.id]);
   }
 
 }

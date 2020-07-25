@@ -1,4 +1,4 @@
-<form [formGroup]="noteForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="noteForm" (ngSubmit)="onSubmit(noteForm.value)">
     <div class="row" id="btnRow">
         <button class="btn btn-danger" type="button" (click)="onDelete()">
             Delete
@@ -6,27 +6,27 @@
         <button 
             class="btn btn-success" 
             type="submit" 
-            [disabled]="!noteForm.valid || !noteForm.get('noteBody').dirty && !noteForm.get('noteTitle').dirty">
+            [disabled]="!noteForm.valid || !noteForm.get('body').dirty && !noteForm.get('title').dirty">
             Save
         </button>
     </div>
     <div class="form-group">
-        <label for="noteTitle">Title</label>
+        <label for="title">Title</label>
         <input 
             type="text" 
-            id="noteTitle" 
-            formControlName="noteTitle" 
+            id="title" 
+            formControlName="title" 
             class="form-control">
-        <span *ngIf="!noteForm.get('noteTitle').valid && noteForm.get('noteTitle').touched" class="help-block">
+        <span *ngIf="!noteForm.get('title').valid && noteForm.get('title').touched" class="help-block">
             <span>
                 This Field is required!
             </span>
         </span>
     </div>
     <div class="form-group">
-        <label for="noteBody">Body</label>
-        <textarea type="text" id="noteBody" formControlName="noteBody" class="form-control"></textarea>
-        <span *ngIf="!noteForm.get('noteBody').valid && noteForm.get('noteBody').touched" class="help-block">
+        <label for="body">Body</label>
+        <textarea type="text" id="body" formControlName="body" class="form-control"></textarea>
+        <span *ngIf="!noteForm.get('body').valid && noteForm.get('body').touched" class="help-block">
             <span>
                 This Field is required!
             </span>

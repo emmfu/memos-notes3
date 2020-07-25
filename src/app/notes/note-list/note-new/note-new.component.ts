@@ -19,8 +19,8 @@ export class NoteNewComponent implements OnInit {
 
   ngOnInit(): void {
     this.noteForm = new FormGroup ({
-      'noteTitle': new FormControl(null, [Validators.required]),
-      'noteBody': new FormControl(null, [Validators.required])
+      'title': new FormControl(null, [Validators.required]),
+      'body': new FormControl(null, [Validators.required])
     });
 
     this.noteForm.statusChanges.subscribe(
@@ -28,8 +28,9 @@ export class NoteNewComponent implements OnInit {
     );
   }
 
-  onSubmit(noteData: { noteTitle: string; noteBody: string }) {
-    console.log(noteData);
+  onSubmit(noteData: { title: string; body: string }) {
+    console.log("onSubmit: ", noteData);
+    this.notesService.postNotes(noteData);
     this.router.navigate(['/notes']);
   }
 
