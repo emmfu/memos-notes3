@@ -22,16 +22,15 @@ export class NoteNewComponent implements OnInit {
       'title': new FormControl(null, [Validators.required]),
       'body': new FormControl(null, [Validators.required])
     });
-
-    this.noteForm.statusChanges.subscribe(
-      (status) => console.log(status)
-    );
   }
 
   onSubmit(noteData: { title: string; body: string }) {
-    console.log("onSubmit: ", noteData);
-    this.notesService.postNotes(noteData);
-    this.router.navigate(['/notes']);
+    const returned = this.notesService.postNotes(noteData);
+    console.log("Returned onAdd: ", returned);
+    this.notesService.getNotes().then((response: any) => {
+      this.notesService.changeNotes(response);
+      this.router.navigate(['/notes']); 
+    });
   }
 
   onClear() {

@@ -11,10 +11,16 @@ import { NoteService } from 'src/app/note.service';
 export class NoteListItemComponent implements OnInit {
   @Input() note: Note;
   @Input() index: number;
+  paramsId: number;
+  noteId: number;
   constructor(private router: Router,
-              private notesService: NoteService) { }
+              private notesService: NoteService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.paramsId = +this.route.snapshot.params['id'];
+    this.noteId = +this.note.id;
+
   }
 
   onClick() {
