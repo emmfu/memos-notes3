@@ -12,68 +12,64 @@ import { Subscription, BehaviorSubject } from 'rxjs';
 })
 export class NoteDetailsComponent implements OnInit {
   noteForm: FormGroup;
-  id: number;
+  id: string;
   clickedNote: Note;
   notes: Note[] = [];
-  isNote: boolean;
 
   constructor(private route: ActivatedRoute,
     private notesService: NoteService,
     private router: Router) { }
 
   ngOnInit(): void {
-    // this.route.params.subscribe(
-    //   (params: Params) => {
-    //     this.notesService.clickedNote.subscribe(newNote => this.clickedNote = newNote);
-    //     this.notesService.newNotes.subscribe(newNotes => this.notes = newNotes);
-    //     this.notesService.getNotes().then((response: any) => {
-    //       this.notes = response;
-    //       console.log("Newly set notes", this.notes);
-    //     }).then(() => {
-    //       console.log("The realNote: ", this.clickedNote);
-    //     });
-    //     this.id = +params['id'];
-    //     this.initForm();
-    //   }
-    // )
-    // this.initForm();
     this.notesService.clickedNote.subscribe(newNote => this.clickedNote = newNote);
     this.notesService.newNotes.subscribe(newNotes => this.notes = newNotes);
-    this.route.params.subscribe(
+    this.loadPage();
+  }
+  
+  private loadPage() {
+    this.route.params.subscribe(  
       (params: Params) => {
-        if (this.clickedNote == null) {
-          console.log("this is params id:", params['id']);
+        this.id = params['id'];
+        if (this.clickedNote === null) {
+          this.notesService.getNote(+this.id).then((response: any) => {
+            if(!response.length){
+              this.router.navigate(['/not-found',])
+            }
+            this.clickedNote = response[0];
+            this.notesService.changeNote(this.clickedNote);
+            this.initForm(this.clickedNote);
+          });
         } else {
-          console.log("NOT NULL");
-          this.initForm();
+          this.initForm(this.clickedNote);
         }
       }
     )
   }
 
-  private initForm() {
-    const title = this.clickedNote.title;
-    const body = this.clickedNote.body
+  private initForm(note: Note) {
+    const title = note.title;
+    const body = note.body;
     this.noteForm = new FormGroup({
       'title': new FormControl(title, [Validators.required]),
       'body': new FormControl(body, [Validators.required])
     });
   }
 
-  onSubmit(noteData: { title: string; body: string }) {
-    let updatedNote = { title: noteData.title, body: noteData.body, id: this.clickedNote.id };
-    this.notesService.updateNote(updatedNote);
-    this.notesService.getNotes().then((response: any) => {
-      this.notesService.changeNotes(response);
-      this.router.navigate(['/notes']);
-    })
+  onUpdate(noteData: { title: string; body: string }) {
+    const noteTitle: string = noteData.title;
+    const noteBody: string = noteData.body;
+    let updatedNote = {title: noteTitle, body: noteBody, id: this.clickedNote.id };
+    console.log('updatednote sent? ', updatedNote);
+    let response = this.notesService.updateNote(updatedNote);
+    this.router.navigate(['/notes/']);
+    console.log('response: ', response);
   }
 
   onDelete() {
     this.notesService.deleteNote(this.clickedNote);
     this.notesService.getNotes().then((response: any) => {
       this.notesService.changeNotes(response);
-      this.router.navigate(['/notes']);
+      this.router.navigate(['/notes']); 
     });
   }
 

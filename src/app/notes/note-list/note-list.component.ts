@@ -11,17 +11,19 @@ import { NoteService } from 'src/app/note.service';
 export class NoteListComponent implements OnInit {
   notes: Note[] = [];
   note: Note;
+  noteId: number;
 
   constructor(private router: Router,
     private notesService: NoteService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.notesService.clickedNote.subscribe(newNote => this.note = newNote);
     this.notesService.newNotes.subscribe(newNotes => this.notes = newNotes);
     this.notesService.getNotes().then((response: any) => {
-      this.notes = response;
+      console.log('notes response:', response);
+      this.notes = response.results;
     });  
+    
   }
 
   onAdd() {

@@ -25,8 +25,8 @@ export class NoteNewComponent implements OnInit {
   }
 
   onSubmit(noteData: { title: string; body: string }) {
+    console.log("Sent noteData ", noteData);
     const returned = this.notesService.postNotes(noteData);
-    console.log("Returned onAdd: ", returned);
     this.notesService.getNotes().then((response: any) => {
       this.notesService.changeNotes(response);
       this.router.navigate(['/notes']); 

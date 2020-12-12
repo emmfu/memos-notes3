@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Note } from 'src/app/note.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { NoteService } from 'src/app/note.service';
 
 @Component({
@@ -10,22 +10,42 @@ import { NoteService } from 'src/app/note.service';
 })
 export class NoteListItemComponent implements OnInit {
   @Input() note: Note;
-  @Input() index: number;
-  paramsId: number;
-  noteId: number;
+  @Input() noteId: number;
+  clickedNote: Note = null;
+  isClicked: boolean = false;
+
   constructor(private router: Router,
-              private notesService: NoteService,
-              private route: ActivatedRoute) { }
+    private notesService: NoteService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.paramsId = +this.route.snapshot.params['id'];
-    this.noteId = +this.note.id;
+    this.notesService.clickedNote.subscribe(newNote => this.clickedNote = newNote);
+    console.log("note#: ", this.note.id);
+    console.log("snapshot: ", this.route.snapshot.params);
+    console.log("clickedNote: ", this.clickedNote);
+    
+    // if (this.note.id === this.clickedNote.id) {
+    //   this.isClicked = true;
+    //   console.log("checking for isClicked2: ", this.isClicked);
+    //   console.log("Clicked note: ", this.note)
 
+    // }
+    // if (this.clickedNote !== null) {
+    //   console.log("checking for isClicked: ", this.isClicked);
+    // }
   }
 
   onClick() {
-    this.notesService.changeNote(this.note);   
+    this.notesService.changeNote(this.note);
     this.router.navigate(['/notes/', this.note.id]);
+  }
+
+  getIsClicked() {
+    let isClicked: boolean = false;
+    if(this.clickedNote && this.note.id === this.clickedNote.id) {
+      isClicked = true;
+    }
+    return isClicked;
   }
 
 }

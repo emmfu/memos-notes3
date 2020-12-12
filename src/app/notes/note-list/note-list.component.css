@@ -1,11 +1,9 @@
-.row {
-    justify-content: right;
-    padding: 3px;
-}
-#btnRow {
-    border-bottom: 1px solid lightgray;
+.btn {
+    margin: 3px;
 }
 
-#noteItemRow {
-    flex-direction: column;
+#btnCol {
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    justify-content: flex-end;
 }

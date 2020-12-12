@@ -1,9 +1,5 @@
-<div  
-    (click)="onClick()" 
-    routerLinkActive="active" 
-    class="list-group-item clerfix">
-    <!-- [routerLink]="[index]" -->
-    <h4 class="list-group-item-heading">{{ note.title }}</h4>
-    <p class="list-group-item-text">{{ note.body }}</p>
+<li (click)="onClick()"  [class.active]="getIsClicked()"  class="list-group-item" [ngClass]="{'active': isClicked}">
 
-</div>
+    <h4 class="list-group-item-heading">{{ (note.title.length>20) ? (note.title | slice:0:17)+'...':(note.title) }}</h4>
+    <p class="list-group-item-text">{{ (note.body.length>20) ? (note.body | slice:0:17)+'...':(note.body)}}</p>
+</li>

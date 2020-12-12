@@ -1,36 +1,36 @@
-<form [formGroup]="noteForm" (ngSubmit)="onSubmit(noteForm.value)">
+<form [formGroup]="noteForm" (ngSubmit)="onUpdate(noteForm.value)">
     <div class="row" id="btnRow">
-        <button class="btn btn-danger" type="button" (click)="onDelete()">
-            Delete
-        </button>
-        <button 
-            class="btn btn-success" 
-            type="submit" 
-            [disabled]="!noteForm.valid || !noteForm.get('body').dirty && !noteForm.get('title').dirty">
-            Save
-        </button>
+        <div class="col" id="btnCol">
+            <button class="btn btn-danger" type="button" (click)="onDelete()">
+                Delete
+            </button>
+            <button class="btn btn-success" type="submit"
+                [disabled]="!noteForm.valid || !noteForm.get('body').dirty && !noteForm.get('title').dirty">
+                Save
+            </button>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input 
-            type="text" 
-            id="title" 
-            formControlName="title" 
-            class="form-control">
-        <span *ngIf="!noteForm.get('title').valid && noteForm.get('title').touched" class="help-block">
-            <span>
-                This Field is required!
-            </span>
-        </span>
-    </div>
-    <div class="form-group">
-        <label for="body">Body</label>
-        <textarea type="text" id="body" formControlName="body" class="form-control"></textarea>
-        <span *ngIf="!noteForm.get('body').valid && noteForm.get('body').touched" class="help-block">
-            <span>
-                This Field is required!
-            </span>
-        </span>
+    <div class="row" id="formRow">
+        <div class="col" id="formCol">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" formControlName="title" class="form-control">
+                <span *ngIf="!noteForm.get('title').valid && noteForm.get('title').touched" class="help-block">
+                    <span>
+                        This Field is required!
+                    </span>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="body">Body</label>
+                <textarea type="text" id="body" formControlName="body" class="form-control"></textarea>
+                <span *ngIf="!noteForm.get('body').valid && noteForm.get('body').touched" class="help-block">
+                    <span>
+                        This Field is required!
+                    </span>
+                </span>
+            </div>
+        </div>
     </div>
 
 </form>

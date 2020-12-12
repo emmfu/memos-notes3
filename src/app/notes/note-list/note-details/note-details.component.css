@@ -1,13 +1,17 @@
 .btn {
     margin: 3px;
 }
-#btnRow {
+#btnCol {
     align-items: baseline;
     border-bottom: 1px solid lightgrey;
+    display: flex;
     justify-content: right;
     padding-left: 10px;
 }
 
+#formCol {
+    padding-right: 30px;
+}
 span {
     color: red;
 }

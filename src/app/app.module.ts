@@ -12,6 +12,7 @@ import { NoteListItemComponent } from './notes/note-list/note-list-item/note-lis
 import { NoteNewComponent } from './notes/note-list/note-new/note-new.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NoteService } from './note.service';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NoteService } from './note.service';
     NoteListComponent,
     NoteDetailsComponent,
     NoteListItemComponent,
-    NoteNewComponent
+    NoteNewComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
